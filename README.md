@@ -58,7 +58,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 }
 ````
 
@@ -105,7 +105,6 @@ class ApiController extends Controller
     function index(Request $request)
     {
         $user= User::where('email', $request->email)->first();
-        // print_r($data);
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response([
                     'message' => ['These credentials do not match our records.']
